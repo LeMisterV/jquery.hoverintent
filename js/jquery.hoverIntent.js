@@ -225,4 +225,4 @@
 	$.fn.mouseleaveintent = mouseleaveintent;
 	$.fn.hoverintent = hoverintent;
 
-})(this, this.jQuery);
+}(this, this.jQuery));
