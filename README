@@ -1,0 +1,27 @@
+jQuery plugin that implements two new events : mouseenterintent and mouseleaveintent
+
+This plugin also adds three jQuery methods :
+    hoverintent : like jquery.hover, but with the intent
+    mouseenterintent
+    mouseleaveintent
+
+Use :
+    $(selector).hoverintent(myEnterFunction, myLeaveFunction [, options]);
+    $(selector).mouseenterintent(myFunction [, options]);
+    $(selector).mouseleaveintent(myFunction [, options]);
+    $(selector).bind('mouseenterintent' [, options], myFunction);
+    $(selector).bind('mouseleaveintent' [, options], myFunction);
+
+Options :
+    maxSpeed           : (default: 150) mouse cursor must go slower than this maximum mouse speed (pixels/s)
+    enterTimeout       : (default: 500) if mouse cursor stay this time (ms) inside the element the enter event is triggered
+    leaveTimeout       : (default: 300) if mouse cursor go out of the element more than this time (ms) the leave event is triggered
+    checkSpeedInterval : (default: 40) interval for mouse speed checks (can't be lower than 10)
+
+
+This script was inspired by a script written by : Brian Cherne <brian@cherne.net>
+
+Free to use, free to study, free to change, free to redistibute
+
+@author  : Nicolas Deveaud <nicolas@deveaud.fr>
+@version : 1.2 (realease date: sept 21 2010)

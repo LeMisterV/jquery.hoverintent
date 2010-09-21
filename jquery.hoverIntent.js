@@ -19,7 +19,7 @@
  * Free to use, free to study, free to change, free to redistibute
  *
  * @author  : Nicolas Deveaud <nicolas@deveaud.fr>
- * @version : 1.1 (realease date: jan 02 2010)
+ * @version : 1.2 (realease date: sept 21 2010)
  */
 
 (function(window, $, undef) {
