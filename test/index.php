@@ -1,5 +1,5 @@
 <?php
-$projName = 'Demo';
+$projName = 'jQuery.hoverIntent';
 
 // Liste des fichiers JS qui composent ce projet
 $projScripts = array(
