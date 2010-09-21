@@ -24,7 +24,7 @@
 
 (function(window, $, undef) {
 	if($ === undef) {
-		throw new Error('Dépendence non satisfaite : jQuery');
+		throw new Error('DÃ©pendence non satisfaite : jQuery');
 	}
 
 	function HoverIntent(elem, options) {
@@ -146,8 +146,8 @@
 			else if(eventName === 'leave') {
 				options.leaveTimeout = 0;
 			}
-			// Il n'est peut-être pas bond  de couper  les captures d'événements.
-			// Si j'ai des timeout à 0, cela revient à un hover simple. Et si j'unbind le
+			// Il n'est peut-Ãªtre pas bond  de couper  les captures d'Ã©vÃ©nements.
+			// Si j'ai des timeout Ã  0, cela revient Ã  un hover simple. Et si j'unbind le
 			// enterintent seulement par exemple, avec les unbind je vais me retrouver sans
 			// leaveintent non plus... Alors que je voudrais qu'il se comporte toujours comme
 			// un leave normal.
