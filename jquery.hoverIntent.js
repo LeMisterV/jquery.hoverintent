@@ -146,7 +146,7 @@
 			else if(eventName === 'leave') {
 				options.leaveTimeout = 0;
 			}
-			// Il n'est peut-être pas bond  de couper  les captures d'événements.
+			// Il n'est peut-être pas bond  de couper les captures d'événements.
 			// Si j'ai des timeout à 0, cela revient à un hover simple. Et si j'unbind le
 			// enterintent seulement par exemple, avec les unbind je vais me retrouver sans
 			// leaveintent non plus... Alors que je voudrais qu'il se comporte toujours comme
@@ -213,16 +213,16 @@
 	}
 
 	// Declaring special events
-	$.event.special.mouseenterintent = specialEventSetter('enter', {
+	$.event.special.mouseenterintent = $.event.special.mouseenterintent || specialEventSetter('enter', {
 															maxSpeed			: 150,
 															enterTimeout		: 500,
 															checkSpeedInterval	: 40
 														});
-	$.event.special.mouseleaveintent = specialEventSetter('leave', {leaveTimeout	: 300});
+	$.event.special.mouseleaveintent = $.event.special.mouseleaveintent || specialEventSetter('leave', {leaveTimeout	: 300});
 
 	// Declaring jQuery plugins
-	$.fn.mouseenterintent = mouseenterintent;
-	$.fn.mouseleaveintent = mouseleaveintent;
-	$.fn.hoverintent = hoverintent;
+	$.fn.mouseenterintent = $.fn.mouseenterintent || mouseenterintent;
+	$.fn.mouseleaveintent = $.fn.mouseleaveintent || mouseleaveintent;
+	$.fn.hoverintent = $.fn.hoverintent || hoverintent;
 
 }(this, this.jQuery));
