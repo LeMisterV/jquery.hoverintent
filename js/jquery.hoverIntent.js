@@ -166,18 +166,21 @@
                 options = $.extend({}, defaultValues, options);
                 $(this)
                     .each(function () {
-                        var instance = $(this).data('hoverintent');
+                        var instance = $(this).data('HoverIntent');
                         if (instance && typeof instance.changeOptions === 'function') {
                             instance.changeOptions(options);
                         }
                         else {
-                            $(this).data('hoverintent', new HoverIntent(this, options));
+                            $(this).data('HoverIntent', new HoverIntent(this, options));
                         }
                     });
             },
 
             teardown: function () {
-                $(this).data('hoverintent').unbind(eventName);
+                var instance = $(this).data('HoverIntent');
+                if (instance) {
+                    instance.unbind(eventName);
+                }
             }
         };
     }
