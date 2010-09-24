@@ -162,7 +162,7 @@
     // Shortcut function to declare both enter and leave special events
     function specialEventSetter(eventName, defaultValues) {
         return {
-            setup: function (options, namespaces) {
+            setup: function (options) {
                 options = $.extend({}, defaultValues, options);
                 $(this)
                     .each(function () {
@@ -176,7 +176,7 @@
                     });
             },
 
-            teardown: function (namespaces) {
+            teardown: function () {
                 $(this).data('hoverintent').unbind(eventName);
             }
         };
