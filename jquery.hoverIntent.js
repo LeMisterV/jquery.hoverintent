@@ -162,22 +162,25 @@
     // Shortcut function to declare both enter and leave special events
     function specialEventSetter(eventName, defaultValues) {
         return {
-            setup: function (options, namespaces) {
+            setup: function (options) {
                 options = $.extend({}, defaultValues, options);
                 $(this)
                     .each(function () {
-                        var instance = $(this).data('hoverintent');
+                        var instance = $(this).data('HoverIntent');
                         if (instance && typeof instance.changeOptions === 'function') {
                             instance.changeOptions(options);
                         }
                         else {
-                            $(this).data('hoverintent', new HoverIntent(this, options));
+                            $(this).data('HoverIntent', new HoverIntent(this, options));
                         }
                     });
             },
 
-            teardown: function (namespaces) {
-                $(this).data('hoverintent').unbind(eventName);
+            teardown: function () {
+                var instance = $(this).data('HoverIntent');
+                if (instance) {
+                    instance.unbind(eventName);
+                }
             }
         };
     }
