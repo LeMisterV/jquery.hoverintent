@@ -206,13 +206,20 @@
     }
 
     function hoverintent(fnin, fnout, options) {
-        if(options.group) {
-            var spectre = $({})
-                .bind('mouseenterintent', fnin)
-                .bind('mouseleaveintent', options, fnout);
+        if(options && options.group) {
+            var spectre = {
+                    cible   : this
+                };
+            $(spectre)
+                .bind('mouseenterintent', function() {
+                    fnin.apply(this.cible, arguments);
+                })
+                .bind('mouseleaveintent', options, function() {
+                    fnout.apply(this.cible, arguments);
+                });
 
-            return this.bind('mouseenter mouseleave', function(evt) {
-                spectre.trigger(evt.type);
+            return this.bind('mouseenter mouseleave mousemove', function(evt) {
+                $.event.handle.call(spectre, evt);
             });
         }
         // Both events will be manage with the same HoverIntent instance, so we can set options just on the secon one, it will impact the first event too.
