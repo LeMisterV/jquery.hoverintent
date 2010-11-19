@@ -12,6 +12,7 @@
  *   enterTimeout       : (default: 500) if mouse cursor stay this time (ms) inside the element the enter event is triggered
  *   leaveTimeout       : (default: 300) if mouse cursor go out of the element more than this time (ms) the leave event is triggered
  *   checkSpeedInterval : (default: 40) interval for mouse speed checks (can't be lower than 10)
+ *   group              : (default: false) treat all nodes in the jQuery selection as one element
  *
  *
  * This script was inspired by a script written by : Brian Cherne <brian@cherne.net>
@@ -19,7 +20,7 @@
  * Free to use, free to study, free to change, free to redistibute
  *
  * @author  : Nicolas Deveaud <nicolas@deveaud.fr>
- * @version : 1.3 (realease date: sept 21 2010)
+ * @version : 1.4 (realease date: nov 19 2010)
  */
 
 (function (window, Error, Math, $, undef) {
@@ -222,7 +223,7 @@
                 $.event.handle.call(spectre, evt);
             });
         }
-        // Both events will be manage with the same HoverIntent instance, so we can set options just on the secon one, it will impact the first event too.
+        // Both events will be manage with the same HoverIntent instance, so we can set options just on the second one, it will impact the first event too.
         return this
             .bind('mouseenterintent', fnin)
             .bind('mouseleaveintent', options, fnout);

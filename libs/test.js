@@ -1,1 +1,0 @@
-alert('plugin jquery hoverIntent is loaded');
