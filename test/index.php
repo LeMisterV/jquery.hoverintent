@@ -4,7 +4,7 @@ $projName = 'jQuery.hoverIntent';
 // Liste des fichiers JS qui composent ce projet
 $projScripts = array(
 /*	'path du script'				=> 'charset : utf-8 / iso-8859-1'*/
-	'../../jquery.hoverIntent/jquery.hoverIntent.js'		=> 'iso-8859-1'
+	'../../jquery.hoverIntent/libs/jquery.hoverIntent.js'		=> 'iso-8859-1'
 );
 
 // Liste des fichiers JS qui composent ce projet en mode compilé
