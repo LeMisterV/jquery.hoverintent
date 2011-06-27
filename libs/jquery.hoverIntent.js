@@ -20,12 +20,12 @@
  * Free to use, free to study, free to change, free to redistibute
  *
  * @author  : Nicolas Deveaud <nicolas@deveaud.fr>
- * @version : 1.4 (realease date: nov 19 2010)
+ * @version : 1.4.1 (realease date: june 26 2011)
  */
 
-(function (window, Error, Math, $, undef) {
+(function (window, Math, $, undef) {
     if ($ === undef) {
-        throw new Error('Dépendence non satisfaite : jQuery');
+        throw new window.Error('Unsolved Dependency : jQuery');
     }
 
     function HoverIntent(elem, options) {
@@ -37,16 +37,21 @@
 
         event,
 
+        // Stores current cursor position
         cur = {},
+
+        // Stores previous cursor position
         prv = {};
 
-        // When the "enter engine" is started, on every mouse move, the cursor location is register to be able to get the mouse speed
+        // When the "enter engine" is started, on every mouse move, the cursor
+        // location is registered to be able to get the mouse speed
         function mousemove(e) {
             cur.X = e.pageX;
             cur.Y = e.pageY;
         }
 
-        // Some things to be done before throwing the mouse enter event, or when mouse enter is aborted :
+        // Some things to be done before throwing the mouse enter event, or when
+        // mouse enter is aborted :
         //     Stop cheking speed every [options.checkSpeedInterval]ms
         //     Abort enter timeout
         //     Stop mousemove event handling
@@ -70,7 +75,8 @@
             triggerEvent();
         }
 
-        // Every [options.checkSpeedInterval]ms, wee check mouse speed. If it's lower than [options.maxSpeed]px/s the event is thrown
+        // Every [options.checkSpeedInterval]ms, wee check mouse speed. If it's
+        // lower than [options.maxSpeed]px/s the event is thrown
         function checkSpeed() {
             if (prv.X !== undef && prv.Y !== undef) {
                 var speed = (Math.sqrt(Math.pow(prv.X - cur.X, 2) + Math.pow(prv.Y - cur.Y, 2)) / options.checkSpeedInterval) * 1000;
@@ -82,7 +88,8 @@
             prv.Y = cur.Y;
         }
 
-        // What to do when mouse cursor enters or leaves the HTML object (real event, not intent)
+        // What to do when mouse cursor enters or leaves the HTML object (real
+        // event, not intent)
         function hoverHandler(e) {
             // Register the event to be thrown
             event = e;
@@ -98,7 +105,8 @@
                 //     each [options.checkSpeedInterval]ms => check speed
                 //     after [options.enterTimeout]ms without leaving => trigger the enter event
 
-                // If maxSpeed is set to negative, no speed check, only timeout will work
+                // If maxSpeed is set to negative, no speed check, only timeout
+                /// will work
                 if (options.maxSpeed >= 0) {
                     $(elem).mousemove(mousemove);
                     checkSpeedInterval = window.setInterval(checkSpeed, options.checkSpeedInterval);
@@ -106,7 +114,8 @@
                 timeoutEnter = window.setTimeout(triggerMouseEnter, options.enterTimeout);
             }
             else if (e.type === 'mouseleave' && inside) {
-                // Start leave timeout that will throw the event, unless mouse enters before timeout ends
+                // Start leave timeout that will throw the event, unless mouse
+                // enters before timeout ends
                 timeoutLeave = window.setTimeout(triggerEvent, options.leaveTimeout);
             }
         }
@@ -118,7 +127,8 @@
                 leaveTimeout    : 0
             }, options);
 
-            // It's useless, and probably bad for perfs to have a value under 10 for speed check interval. So bad values are not used
+            // It's useless, and probably bad for perfs to have a value under 10
+            // for speed check interval. So bad values are not used
             if (!options.checkSpeedInterval || options.checkSpeedInterval < 10) {
                 options.checkSpeedInterval = 10;
             }
@@ -144,7 +154,7 @@
             else if (eventName === 'leave') {
                 options.leaveTimeout = 0;
             }
-            // Il n'est peut-être pas bond  de couper les captures d'événements.
+            // Il n'est peut-être pas bon de couper les captures d'événements.
             // Si j'ai des timeout à 0, cela revient à un hover simple. Et si j'unbind le
             // enterintent seulement par exemple, avec les unbind je vais me retrouver sans
             // leaveintent non plus... Alors que je voudrais qu'il se comporte toujours comme
@@ -208,9 +218,14 @@
 
     function hoverintent(fnin, fnout, options) {
         if(options && options.group) {
+
+            // if the "group" option is true, we use a "spectre" object to
+            // represente the nodes group. Than we transmit events from the
+            // nodes to the "spectre" object.
             var spectre = {
                     cible   : this
                 };
+
             $(spectre)
                 .bind('mouseenterintent', function() {
                     fnin.apply(this.cible, arguments);
@@ -230,16 +245,44 @@
     }
 
     // Declaring special events
-    $.event.special.mouseenterintent = $.event.special.mouseenterintent || specialEventSetter('enter', {
-        maxSpeed            : 150,
-        enterTimeout        : 500,
-        checkSpeedInterval  : 40
-    });
-    $.event.special.mouseleaveintent = $.event.special.mouseleaveintent || specialEventSetter('leave', {leaveTimeout : 300});
+    $.event.special.mouseenterintent = $.event.special.mouseenterintent ||
+        specialEventSetter('enter', {
+            maxSpeed            : 150,
+            enterTimeout        : 500,
+            checkSpeedInterval  : 40
+        });
+
+    $.event.special.mouseleaveintent = $.event.special.mouseleaveintent ||
+        specialEventSetter('leave', {
+            leaveTimeout : 300
+        });
+
 
     // Declaring jQuery plugins
     $.fn.mouseenterintent = $.fn.mouseenterintent || mouseenterintent;
     $.fn.mouseleaveintent = $.fn.mouseleaveintent || mouseleaveintent;
     $.fn.hoverintent = $.fn.hoverintent || hoverintent;
 
-}(this, this.Error, this.Math, this.jQuery));
+    // Compatibility with Brian Cherne's plugin
+    $.fn.hoverIntent = $.fn.hoverIntent || function(f, g) {
+        var cfg = $.extend({}, g ? { over: f, out: g } : f ),
+            options = {};
+
+        if(cfg.sensitivity) {
+            // Convert sensibility to maxSpeed.
+            // TODO : Find a good convertion algorythm. This one is just quick and durty.
+            options.maxSpeed = (cfg.sensitivity / 7) * 150;
+        }
+
+        if(cfg.timeout) {
+            options.leaveTimeout = cfg.timeout;
+        }
+
+        if(cfg.interval) {
+            options.checkSpeedInterval = cfg.interval;
+        }
+
+        return $.fn.hoverintent.apply(this, [cfg.over, cfg.out, options]);
+    };
+
+}(this, this.Math, this.jQuery));
