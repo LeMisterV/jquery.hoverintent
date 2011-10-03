@@ -96,6 +96,7 @@
 
             // Abort entering
             stopEnterEngine();
+
             // Stops the leave timeout if it has been started
             window.clearTimeout(timeoutLeave);
 
