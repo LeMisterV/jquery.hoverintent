@@ -75,7 +75,7 @@
             triggerEvent();
         }
 
-        // Every [options.checkSpeedInterval]ms, wee check mouse speed. If it's
+        // Every [options.checkSpeedInterval]ms, we check mouse speed. If it's
         // lower than [options.maxSpeed]px/s the event is thrown
         function checkSpeed() {
             if (prv.X !== undef && prv.Y !== undef) {
