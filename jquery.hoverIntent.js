@@ -234,9 +234,16 @@
                     fnout.apply(this.cible, arguments);
                 });
 
-            return this.bind('mouseenter mouseleave mousemove', function(evt) {
-                $.event.handle.call(spectre, evt);
+            this.bind('mouseenter', function(evt) {
+                $(spectre).trigger('mouseenter', evt);
             });
+            this.bind('mouseleave', function(evt) {
+                $(spectre).trigger('mouseleave', evt);
+            });
+            this.bind('mousemove', function(evt) {
+                $(spectre).trigger('mousemove', evt);
+            });
+            return this;
         }
         // Both events will be manage with the same HoverIntent instance, so we can set options just on the second one, it will impact the first event too.
         return this
