@@ -234,14 +234,8 @@
                     fnout.apply(this.cible, arguments);
                 });
 
-            this.bind('mouseenter', function(evt) {
-                $(spectre).trigger('mouseenter', evt);
-            });
-            this.bind('mouseleave', function(evt) {
-                $(spectre).trigger('mouseleave', evt);
-            });
-            this.bind('mousemove', function(evt) {
-                $(spectre).trigger('mousemove', evt);
+            this.bind('mouseenter mouseleave mousemove', function(evt) {
+                $(spectre).trigger(evt.type, evt);
             });
             return this;
         }
