@@ -223,11 +223,11 @@
             // if the "group" option is true, we use a "spectre" object to
             // represente the nodes group. Than we transmit events from the
             // nodes to the "spectre" object.
-            var spectre = {
+            var spectre = $({
                     cible   : this
-                };
+                });
 
-            $(spectre)
+            spectre
                 .bind('mouseenterintent', function() {
                     fnin.apply(this.cible, arguments);
                 })
@@ -236,7 +236,7 @@
                 });
 
             return this.bind('mouseenter mouseleave mousemove', function(evt) {
-                $.event.handle.call(spectre, evt);
+                spectre.trigger(evt.type, evt);
             });
         }
         // Both events will be manage with the same HoverIntent instance, so we can set options just on the second one, it will impact the first event too.
