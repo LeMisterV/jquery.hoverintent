@@ -2,9 +2,7 @@
 require('/share/tools/jsPackTools/makeJsPackage.php');
 
 makeJsPackage(
-    array(
-        PATH_JS_LAB . 'jquery.hoverIntent/libs/jquery.hoverIntent.js'                 => 'utf-8'
-    ),
+    jsPackage::getFiles(),
     PATH_JS_PROD . 'jquery.hoverIntent.js',
     null,
     'utf-8'
