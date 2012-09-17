@@ -1,0 +1,10 @@
+<?php
+require('/share/tools/jsPackTools/makeJsPackage.php');
+
+makeJsPackage(
+    jsPackage::getFiles(),
+    PATH_JS_PROD . 'jquery.hoverIntent.js',
+    null,
+    'utf-8'
+);
+

@@ -166,7 +166,8 @@
                     .unbind('mouseleave mouseenter', hoverHandler)
                     .removeData('hoverintent');
             }
-*/      };
+*/
+      };
 
         init();
     }
