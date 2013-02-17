@@ -23,9 +23,9 @@
  * @version : 1.4.1 (realease date: june 26 2011)
  */
 
-(function (window, Math, $, undef) {
+(function (setTimeout, setInterval, clearTimeout, clearInterval, Error, Math, $, undef) {
     if ($ === undef) {
-        throw new window.Error('Unsolved Dependency : jQuery');
+        throw new Error('Unsolved Dependency : jQuery');
     }
 
     function HoverIntent(elem, options) {
@@ -56,8 +56,8 @@
         //     Abort enter timeout
         //     Stop mousemove event handling
         function stopEnterEngine() {
-            window.clearInterval(checkSpeedInterval);
-            window.clearTimeout(timeoutEnter);
+            clearInterval(checkSpeedInterval);
+            clearTimeout(timeoutEnter);
             $(elem).unbind('mousemove', mousemove);
             prv = {};
         }
@@ -98,7 +98,7 @@
             stopEnterEngine();
 
             // Stops the leave timeout if it has been started
-            window.clearTimeout(timeoutLeave);
+            clearTimeout(timeoutLeave);
 
             if (e.type === 'mouseenter' && !inside) {
                 // start the enter engine :
@@ -110,14 +110,14 @@
                 /// will work
                 if (options.maxSpeed >= 0) {
                     $(elem).mousemove(mousemove);
-                    checkSpeedInterval = window.setInterval(checkSpeed, options.checkSpeedInterval);
+                    checkSpeedInterval = setInterval(checkSpeed, options.checkSpeedInterval);
                 }
-                timeoutEnter = window.setTimeout(triggerMouseEnter, options.enterTimeout);
+                timeoutEnter = setTimeout(triggerMouseEnter, options.enterTimeout);
             }
             else if (e.type === 'mouseleave' && inside) {
                 // Start leave timeout that will throw the event, unless mouse
                 // enters before timeout ends
-                timeoutLeave = window.setTimeout(triggerEvent, options.leaveTimeout);
+                timeoutLeave = setTimeout(triggerEvent, options.leaveTimeout);
             }
         }
 
@@ -287,4 +287,4 @@
         return $.fn.hoverintent.apply(this, [cfg.over, cfg.out, options]);
     };
 
-}(this, this.Math, this.jQuery));
+}(this.setTimeout, this.setInterval, this.clearTimeout, this.clearInterval, this.Error, this.Math, this.jQuery));
