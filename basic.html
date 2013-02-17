@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>jQuery hoverIntent</title>
+        <meta name="description" content="jQuery plugin hoverintent event">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <p>jQuery HoverIntent demonstration</p>
+        <br>
+        <br>
+        <br>
+        <p>For basic use</p>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="//github.com/LeMisterV/jquery.hoverintent/raw/master/libs/jquery.hoverIntent.js"></script>
+        <script>
+            $('p').hoverintent(
+                function() {
+                    $(this).css('background', 'lime');
+                },
+                function() {
+                    $(this).css('background', 'transparent');
+                }
+            );
+        </script>
+    </body>
+</html>
