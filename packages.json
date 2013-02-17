@@ -1,7 +1,0 @@
-{
-    "packages" : {
-        "default" : {
-            "jquery.hoverIntent/libs/jquery.hoverIntent.js"               : "utf-8"
-        }
-    }
-}
