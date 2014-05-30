@@ -117,7 +117,7 @@
         triggerEvent : function triggerEvent() {
             this.inside = !this.inside;
             this.event.type = this.inside ? 'mouseenterintent' : 'mouseleaveintent';
-            $.event.handle.call(this.elem, this.event);
+            $.event.dispatch.call(this.elem, this.event);
         },
 
         // for mouseEnter, we have some things to do before throwing the event
